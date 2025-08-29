@@ -9,6 +9,8 @@ import org.puchori.springbootproject.dto.BoardDTO;
 import org.puchori.springbootproject.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -27,6 +29,19 @@ public class BoardServiceImpl implements BoardService{
     Long bno = boardRepository.save(board).getBno();
 
     return bno;
+
+  }
+
+  @Override
+  public BoardDTO readOne(Long bno) {
+
+    Optional<Board> result = boardRepository.findById(bno);
+
+    Board board = result.orElseThrow();
+
+    BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
+
+    return boardDTO;
 
   }
 }
