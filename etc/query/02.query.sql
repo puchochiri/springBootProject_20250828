@@ -48,9 +48,7 @@ insert into tbl_member(mid, mpw, mname) values ('user02','1111','사용자0');
 
 select * from tbl_member where mid = 'user00' and mpw = '1111';
 
-fde7c952-5650-4a24-a871-b81786e34342
 
-    4d26b01b-3ac1-438b-a3e6-63c2347f0cd9
 
 
 drop table tbl_todo;
