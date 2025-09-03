@@ -51,11 +51,11 @@
               <th scope="col">RegDate</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody th:with="link = ${pageRequestDTO.getLink()}">
               <tr th:each="dto:${responseDTO.dtoList}">
                 <th scope="row">[[${dto.bno}]]</th>
                 <td>
-                  [[${dto.title}]]
+                  <a th:href="|@{/board/read(bno =${dto.bno})}&${link}|">[[${dto.title}]]</a>
                 </td>
                 <td>[[${dto.writer}]]</td>
                 <td>[[${#temporals.format(dto.regDate,'yyyy-MM-dd')}]]</td>
@@ -65,7 +65,7 @@
           <div class="float-end">
             <ul class="pagination flex-wrap">
               <li class="page-item" th:if="${responseDTO.prev}">
-                <a class="page-item" th:if="${responseDTO.start -1}">Previous</a>
+                <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
               </li>
               <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
                 <li th:class="${responseDTO.page == i}?'page-item active':'page-item'">
@@ -83,6 +83,11 @@
 
     </div>
   </div>
+
+
+
+
+
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
@@ -105,6 +110,27 @@
     formObj.submit();
 
   },false);
+
+  document.querySelector(".clearBtn").addEventListener("click", function (e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    self.location = '/board/list';
+
+  },false);
+
+
+  // show modal
+  const result = [[${result}]];
+
+  const modal = new bootstrap.Modal(document.querySelector(".modal"));
+
+  if(result){
+//    alert(result);
+    document.querySelector(".modal-body").innerHTML = result;
+    modal.show();
+
+  }
 
 
 
