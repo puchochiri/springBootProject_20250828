@@ -96,7 +96,7 @@
         e.preventDefault();
         e.stopPropagation();
 
-        formObj.action = `/board/remove`;
+        formObj.action = `/board/remove?${link}`;
         formObj.method = `post`;
         formObj.submit();
 

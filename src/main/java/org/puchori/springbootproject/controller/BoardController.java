@@ -83,10 +83,11 @@ public class BoardController {
                        RedirectAttributes redirectAttributes) {
     log.info("board modify post......" + boardDTO);
 
+    String link = pageRequestDTO.getLink();
     if(bindingResult.hasErrors()){
       log.info("has errors.......");
 
-      String link = pageRequestDTO.getLink();
+
 
       redirectAttributes.addFlashAttribute("errors",bindingResult.getAllErrors());
 
@@ -101,19 +102,21 @@ public class BoardController {
 
     redirectAttributes.addAttribute("bno",boardDTO.getBno());
 
-    return "redirect:/board/read";
+    return "redirect:/board/read?" + link ;
 
   }
 
   @PostMapping("remove")
-  public String remove(Long bno, RedirectAttributes redirectAttributes){
+  public String remove(Long bno,PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes){
     log.info("remove post... " + bno);
+
+    String link = pageRequestDTO.getLink();
 
     boardService.remove(bno);
 
     redirectAttributes.addFlashAttribute("result","removed");
 
-    return "redirect:/board/list";
+    return "redirect:/board/list?" + link;
   }
 
 
