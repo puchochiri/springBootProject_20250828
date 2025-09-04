@@ -102,7 +102,7 @@ public class BoardController {
 
     redirectAttributes.addAttribute("bno",boardDTO.getBno());
 
-    return "redirect:/board/read?" + link ;
+    return "redirect:/board/read?" + link;
 
   }
 
